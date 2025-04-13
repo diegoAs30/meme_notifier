@@ -1,0 +1,16 @@
+{
+    "category_weights": {
+        "programming": 0.4,
+        "3d_design": 0.3,
+        "general": 0.3
+    },
+    "notification": {
+        "duration": 15,
+        "max_size": 1200,
+        "fallback_icon": "/usr/share/icons/gnome/32x32/status/dialog-warning.png"
+    },
+    "storage": {
+        "meme_dir": "~/.local/share/meme_notifier",
+        "max_files": 50
+    }
+}

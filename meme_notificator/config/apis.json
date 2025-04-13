@@ -1,0 +1,44 @@
+{
+    "programming": {
+        "programmerhumor": {
+            "url": "https://programming-memes-api.vercel.app/api/v1/memes/random",
+            "method": "GET",
+            "headers": {},
+            "processor": "lambda data: {'title': data['title'], 'url': data['imageUrl'], 'source': 'ProgrammingHumor'}"
+        },
+        "devto": {
+            "url": "https://dev.to/api/articles?tag=memes&top=30",
+            "method": "GET",
+            "headers": {"Accept": "application/vnd.forem.api-v1+json"},
+            "processor": "lambda data: random.choice([{'title': item['title'], 'url': item['social_image'], 'source': 'DEV Community'} for item in data if item['social_image']])"
+        },
+        "githubmemes": {
+            "url": "https://raw.githubusercontent.com/tech-memes/tech-memes/main/memes.json",
+            "method": "GET",
+            "headers": {},
+            "processor": "lambda data: random.choice([{'title': item['name'], 'url': item['url'], 'source': 'GitHubMemes'} for item in data if item['url']])"
+        }
+    },
+    "3d_design": {
+        "blendermemes": {
+            "url": "https://www.reddit.com/r/blendermemes/hot.json?limit=50",
+            "method": "GET",
+            "headers": {"User-Agent": "MemeNotifier/1.0"},
+            "processor": "lambda data: {'title': random.choice([p['data']['title'] for p in data['data']['children'] if p['data'].get('post_hint') == 'image']), 'url': random.choice([p['data']['url'] for p in data['data']['children'] if p['data'].get('post_hint') == 'image']), 'source': 'BlenderMemes'} if data.get('data', {}).get('children') else None"
+        }
+    },
+    "general": {
+        "reddit": {
+            "url": "https://meme-api.com/gimme",
+            "method": "GET",
+            "headers": {},
+            "processor": "lambda data: {'title': data['title'], 'url': data['url'], 'source': 'Reddit'}"
+        },
+        "imgflip": {
+            "url": "https://api.imgflip.com/get_memes",
+            "method": "GET",
+            "headers": {},
+            "processor": "lambda data: {'title': random.choice(data['data']['memes'])['name'], 'url': random.choice(data['data']['memes'])['url'], 'source': 'Imgflip'}"
+        }
+    }
+}
